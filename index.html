@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SDLC 3-2-1 Learning Innovation</title>
+
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background:#f4f6f8;
+  margin:0;
+  padding:20px;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+h1,h2{
+  text-align:center;
+}
+
+button{
+  padding:10px 20px;
+  font-size:16px;
+  margin-top:20px;
+  cursor:pointer;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:#fff;
+}
+
+th,td{
+  border:1px solid #ccc;
+  padding:10px;
+  vertical-align:top;
+}
+
+th{
+  background:#e3f2fd;
+}
+
+.instruction{
+  background:#fff3cd;
+  padding:20px;
+  border-left:5px solid #ffc107;
+}
+
+.drag-container{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.drag-item{
+  background:#90caf9;
+  padding:8px 12px;
+  border-radius:5px;
+  cursor:grab;
+}
+
+.drop-zone{
+  min-height:90px;
+  border:2px dashed #aaa;
+  padding:10px;
+  background:#fff;
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 : INSTRUCTIONS -->
+<div class="page active" id="page1">
+  <h1>SDLC Learning Activity</h1>
+
+  <div class="instruction">
+    <h2>📌 3-2-1 Memorisation Method</h2>
+    <ol>
+      <li><b>Read</b> the keywords with their SDLC phase <b>3 times</b>.</li>
+      <li><b>Say</b> the keywords aloud <b>2 times</b> without looking.</li>
+      <li><b>Write</b> the keywords <b>1 time</b> from memory.</li>
+    </ol>
+    <p><b>Repeat this 3-2-1 method THREE (3) times</b>.</p>
+  </div>
+
+  <center>
+    <button onclick="nextPage(2)">Next ▶</button>
+  </center>
+</div>
+
+<!-- PAGE 2 : TABLE -->
+<div class="page" id="page2">
+  <h2>SDLC Phases & Keywords</h2>
+  <p style="text-align:center;">
+    Apply the <b>3-2-1 method</b> using the table below before moving on.
+  </p>
+
+  <table>
+    <tr>
+      <th>Planning</th>
+      <th>Analysis</th>
+      <th>Design</th>
+      <th>Implementation</th>
+      <th>Support & Security</th>
+    </tr>
+    <tr>
+      <td>
+        Review project requests<br>
+        Prioritise project requests<br>
+        Allocate resources<br>
+        Form project team
+      </td>
+      <td>
+        Study current system<br>
+        Determine user requirements<br>
+        Feasibility study<br>
+        Recommend solution
+      </td>
+      <td>
+        Interface design<br>
+        Flowchart<br>
+        Pseudocode<br>
+        Prototype
+      </td>
+      <td>
+        Develop programs<br>
+        Testing<br>
+        Train users<br>
+        System conversion
+      </td>
+      <td>
+        Maintenance<br>
+        Monitor system performance<br>
+        Security assessment
+      </td>
+    </tr>
+  </table>
+
+  <center>
+    <button onclick="nextPage(3)">Next ▶</button>
+  </center>
+</div>
+
+<!-- PAGE 3 : DRAG & DROP -->
+<div class="page" id="page3">
+  <h2>🧠 Classification Activity</h2>
+  <p style="text-align:center;">
+    Drag each keyword to the correct SDLC phase.
+  </p>
+
+  <div class="drag-container">
+    <div class="drag-item" draggable="true">Testing</div>
+    <div class="drag-item" draggable="true">Allocate resources</div>
+    <div class="drag-item" draggable="true">Prototype</div>
+    <div class="drag-item" draggable="true">Study current system</div>
+    <div class="drag-item" draggable="true">Maintenance</div>
+    <div class="drag-item" draggable="true">Interface design</div>
+    <div class="drag-item" draggable="true">Feasibility study</div>
+    <div class="drag-item" draggable="true">Train users</div>
+    <div class="drag-item" draggable="true">Monitor system performance</div>
+    <div class="drag-item" draggable="true">Recommend solution</div>
+    <div class="drag-item" draggable="true">Form project team</div>
+    <div class="drag-item" draggable="true">Flowchart</div>
+    <div class="drag-item" draggable="true">Pseudocode</div>
+    <div class="drag-item" draggable="true">Develop programs</div>
+    <div class="drag-item" draggable="true">Security assessment</div>
+    <div class="drag-item" draggable="true">System conversion</div>
+    <div class="drag-item" draggable="true">Review project requests</div>
+    <div class="drag-item" draggable="true">Prioritise project requests</div>
+    <div class="drag-item" draggable="true">Determine user requirements</div>
+  </div>
+
+  <table>
+    <tr>
+      <th>Planning</th>
+      <th>Analysis</th>
+      <th>Design</th>
+      <th>Implementation</th>
+      <th>Support & Security</th>
+    </tr>
+    <tr>
+      <td class="drop-zone"></td>
+      <td class="drop-zone"></td>
+      <td class="drop-zone"></td>
+      <td class="drop-zone"></td>
+      <td class="drop-zone"></td>
+    </tr>
+  </table>
+</div>
+
+<script>
+function nextPage(page){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page'+page).classList.add('active');
+}
+
+const items = document.querySelectorAll('.drag-item');
+const zones = document.querySelectorAll('.drop-zone');
+
+items.forEach(item=>{
+  item.addEventListener('dragstart',()=>{
+    item.classList.add('dragging');
+  });
+  item.addEventListener('dragend',()=>{
+    item.classList.remove('dragging');
+  });
+});
+
+zones.forEach(zone=>{
+  zone.addEventListener('dragover',e=>{
+    e.preventDefault();
+    const dragging = document.querySelector('.dragging');
+    zone.appendChild(dragging);
+  });
+});
+</script>
+
+</body>
+</html>
